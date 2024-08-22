@@ -1,5 +1,6 @@
 package com.example.user_management.controller;
 
+import com.example.user_management.model.LoginRequest;
 import com.example.user_management.model.User;
 import com.example.user_management.repository.UserRepo;
 import com.example.user_management.service.UserService;
@@ -17,6 +18,11 @@ public class UserController {
     @PostMapping("/register")
     public User register(@RequestBody User user){
          return userService.register(user);
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestBody LoginRequest loginRequest) {
+        return userService.verify(loginRequest.getUsername(), loginRequest.getPassword());
     }
 
     @GetMapping("/users")

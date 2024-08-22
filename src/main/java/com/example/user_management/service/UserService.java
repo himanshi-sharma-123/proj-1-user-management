@@ -41,4 +41,26 @@ public class UserService {
         user.setPassword(encoder.encode(user.getPassword()));
         return userRepo.save(user);
     }
+
+    public String verify(String username, String password) {
+
+        User user = userRepo.findByUsername(username);
+
+        if (user == null) {
+            return "User not found";
+        }
+
+
+        if(!user.equals(user.getUsername()) && !password.equals(user.getPassword())){
+            return "Bad credentials";
+        }else{
+            return "Logged in successfully";
+        }
+
+        //        if (password.equals(user.getPassword())) {
+//            return "Login successful!";
+//        } else {
+//            return "Invalid credentials";
+//        }
+    }
 }
